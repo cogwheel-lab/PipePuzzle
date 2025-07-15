@@ -1,6 +1,14 @@
 const boardElement = document.getElementById('board');
 const shuffleBtn = document.getElementById('shuffle');
 
+const hintToggleBtn = document.getElementById('hint-toggle');
+const helpBtn = document.getElementById('help');
+
+const solved = [1,2,3,4,5,6,7,8,0];
+let hintActive = false;
+let helpCooldown = false;
+
+
 let board = [];
 
 function initBoard() {
@@ -39,6 +47,11 @@ function render() {
     } else {
       tile.textContent = num;
       tile.addEventListener('click', () => moveTile(idx));
+
+      if (hintActive && num === solved[idx]) {
+        tile.classList.add('correct');
+      }
+
     }
     boardElement.appendChild(tile);
   });
@@ -66,5 +79,51 @@ shuffleBtn.addEventListener('click', () => {
   shuffleBoard();
   render();
 });
+
+
+hintToggleBtn.addEventListener('click', () => {
+  hintActive = !hintActive;
+  hintToggleBtn.textContent = hintActive ? 'ヒントON' : 'ヒントOFF';
+  render();
+});
+
+function getCorrectCount(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === solved[i]) count++;
+  }
+  return count;
+}
+
+function makeHelpfulMove() {
+  const blank = board.indexOf(0);
+  const neighbors = getNeighbors(blank);
+  let bestNeighbor = null;
+  let bestScore = -1;
+  neighbors.forEach(n => {
+    const copy = board.slice();
+    [copy[blank], copy[n]] = [copy[n], copy[blank]];
+    const score = getCorrectCount(copy);
+    if (score > bestScore) {
+      bestScore = score;
+      bestNeighbor = n;
+    }
+  });
+  if (bestNeighbor !== null) {
+    moveTile(bestNeighbor);
+  }
+}
+
+helpBtn.addEventListener('click', () => {
+  if (helpCooldown) return;
+  makeHelpfulMove();
+  helpCooldown = true;
+  helpBtn.disabled = true;
+  setTimeout(() => {
+    helpCooldown = false;
+    helpBtn.disabled = false;
+  }, 3000);
+});
+
 
 initBoard();
