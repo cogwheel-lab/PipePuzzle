@@ -1,0 +1,28 @@
+# OSやエディタ関連の不要ファイル
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# バックアップ系
+*.bak
+*.tmp
+*.log
+
+# Illustrator等で除外したい場合
+*.ai
+
+# VS Codeの設定（個人のみにしたい場合）
+.vscode/
+
+# Pythonなど使っていれば（任意）
+__pycache__/
+*.pyc
+
+# クラフト素材管理用（PipePuzzleと無関係）
+/craft/
+
+# Node.jsパッケージ
+node_modules/
+
+
