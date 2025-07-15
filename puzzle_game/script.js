@@ -225,6 +225,29 @@ function checkRouteConnection() {
   }
 }
 
+// 正しい向きのピースをハイライト
+function showHint() {
+  const correctRotations = getCurrentCorrectRotations();
+  tiles.forEach((tile, index) => {
+    const el = tileElements[index];
+    if (tile.type === 'corner') {
+      const expected = correctRotations[tile.y][tile.x];
+      if (expected !== null &&
+          normalizeRotation(tile.rotation) === normalizeRotation(expected)) {
+        el.style.outline = '3px solid #FFD700';
+        el.style.animation = 'pulse 1s infinite';
+      } else {
+        el.style.outline = '';
+        el.style.animation = '';
+      }
+    } else {
+      el.style.outline = '';
+      el.style.animation = '';
+    }
+  });
+  updateStatus('✨ 正しい向きのピースがハイライトされています、お嬢様 ✨');
+}
+
 // ステータスメッセージを更新
 function updateStatus(message, isSuccess = false) {
     statusDiv.textContent = message;
