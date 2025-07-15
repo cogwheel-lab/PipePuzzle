@@ -20,7 +20,7 @@ __pycache__/
 *.pyc
 
 # クラフト素材管理用（PipePuzzleと無関係）
-/craft/
+docs/craft/
 
 # Node.jsパッケージ
 node_modules/
