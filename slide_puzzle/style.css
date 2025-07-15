@@ -13,11 +13,13 @@ body {
   margin-bottom: 20px;
 }
 
+
 .controls {
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
 }
+
 
 .tile {
   width: 80px;
@@ -36,7 +38,9 @@ body {
   cursor: default;
 }
 
+
 .tile.correct {
   background-color: #c8f5c8;
   transition: background-color 0.3s ease;
 }
+

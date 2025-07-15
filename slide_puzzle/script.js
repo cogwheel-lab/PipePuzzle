@@ -1,11 +1,13 @@
 const boardElement = document.getElementById('board');
 const shuffleBtn = document.getElementById('shuffle');
+
 const hintToggleBtn = document.getElementById('hint-toggle');
 const helpBtn = document.getElementById('help');
 
 const solved = [1,2,3,4,5,6,7,8,0];
 let hintActive = false;
 let helpCooldown = false;
+
 
 let board = [];
 
@@ -45,9 +47,11 @@ function render() {
     } else {
       tile.textContent = num;
       tile.addEventListener('click', () => moveTile(idx));
+
       if (hintActive && num === solved[idx]) {
         tile.classList.add('correct');
       }
+
     }
     boardElement.appendChild(tile);
   });
@@ -75,6 +79,7 @@ shuffleBtn.addEventListener('click', () => {
   shuffleBoard();
   render();
 });
+
 
 hintToggleBtn.addEventListener('click', () => {
   hintActive = !hintActive;
@@ -119,5 +124,6 @@ helpBtn.addEventListener('click', () => {
     helpBtn.disabled = false;
   }, 3000);
 });
+
 
 initBoard();
