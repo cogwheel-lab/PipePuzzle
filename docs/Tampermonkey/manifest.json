@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "5ch ID Namer",
+  "version": "1.0",
+  "description": "5chのIDにあだ名をつけて表示します（日付ごとに保存）",
+  "permissions": ["storage"],
+  "host_permissions": ["https://itest.5ch.net/*/read.cgi/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://itest.5ch.net/*/read.cgi/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  }
+}

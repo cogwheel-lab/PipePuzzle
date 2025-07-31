@@ -33,3 +33,6 @@ venv/
 
 # Gemini CLI設定
 .gemini/
+
+# 一応取っとく画像
+old_img/
